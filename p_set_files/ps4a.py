@@ -23,27 +23,59 @@ def get_permutations(sequence):
     a different order than what is listed here.
     """
 
-    assert len(sequence) != 0
-    if type(sequence) is str:
-        sequence = list(sequence)
+    # FIRST APPROACH:
 
-    # base case -> string of length 1 --> returns itself
-    if len(sequence) == 1:
-        # permutations = sequence
-        return sequence
-    else:
-        first_letter = sequence[0]
-        sequence = get_permutations(sequence[1:])
-        # recursion removes letters from the beginning of the string until sequence is length 1
-        # operations after recursion
-        temp = sequence[:]
-        for n in range(len(temp)):
-            for j in range(len(temp[n]) + 1):
-                string = temp[n][0:j] + first_letter + temp[n][j:]
-                sequence.append(string)
-        for i in temp:
-            sequence.remove(i)
-        return sequence
+    # recursively remove letters from the sequence until len == 1
+    # base case --> permutation on a single letter = [itself]
+    # insert the first letter of the previous sequence in all the possible positions
+    # ex.: 'abcd'
+    # base case = d --> # insert c in possible positions : [.d.]
+    # yields [cd, dc] --> continue with b in : [.c.d.] and in [.d.c.]
+    # repeat for all the letters to get the full set of permutations
+
+    # code:
+    # assert len(sequence) != 0
+    # if type(sequence) is str:
+    #     sequence = list(sequence)
+    # if len(sequence) == 1:
+    #     return sequence
+    # first_letter = sequence[0]
+    # sequence = get_permutations(sequence[1:])
+    # temp = sequence[:]
+    # for n in range(len(temp)):
+    #     for j in range(len(temp[n]) + 1):
+    #         string = temp[n][0:j] + first_letter + temp[n][j:]
+    #         sequence.append(string)
+    # for i in temp:
+    #     sequence.remove(i)
+    # return sequence
+
+    # SECOND APPROACH:
+
+    # fix the first letter
+    # get the permutations of the remaining letters and add them to the fixed letter
+    # recursion allows to reduce the complexity by fixing letters inside the remaining letters set
+    # base case --> len <= 1 sequence = [itself]
+
+    # initiate variables
+    permutations = []
+
+    # base case
+    if len(sequence) <= 1:
+        return [sequence]
+
+    # for each letter get the remaining letters
+    for index in range(len(sequence)):
+        remaining_letters = sequence[0:index] + sequence[index+1:]
+
+        # recursion applied to the remaining letters --> reduces length at each function call
+        # add each permutation to the fixed letter
+        for permutation in get_permutations(remaining_letters):
+            permutations.append(sequence[index] + permutation)
+    return permutations
+
+    # !!! reduce number of recursions?
+    # assure there are no duplicate entries in the final list
 
 
 if __name__ == '__main__':
