@@ -3,7 +3,7 @@
 # Collaborators:
 # Time Spent: x:xx
 
-def get_permutations(sequence):
+def get_permutations(sequence, save={}):
     """
     Enumerate all permutations of a given string
 
@@ -62,17 +62,26 @@ def get_permutations(sequence):
 
     # base case
     if len(sequence) <= 1:
-        return [sequence]
+        return [sequence], save
 
     # for each letter get the remaining letters
     for index in range(len(sequence)):
         remaining_letters = sequence[0:index] + sequence[index+1:]
 
-        # recursion applied to the remaining letters --> reduces length at each function call
-        # add each permutation to the fixed letter
-        for permutation in get_permutations(remaining_letters):
-            permutations.append(sequence[index] + permutation)
-    return permutations
+        # dictionary save to avoid multiple calls to the same recursion values
+        if remaining_letters in save:
+            z = save[remaining_letters]
+        else:
+            # recursion applied to the remaining letters --> reduces length at each function call
+            # add each permutation to the fixed letter
+            z = get_permutations(remaining_letters, save)
+            save[remaining_letters] = z[0]
+
+        for n in z[0]:
+            word = sequence[index] + n
+            if word not in permutations:
+                permutations.append(word)
+    return permutations, save
 
     # !!! reduce number of recursions?
     # assure there are no duplicate entries in the final list
