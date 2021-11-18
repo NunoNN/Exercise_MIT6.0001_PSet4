@@ -3,7 +3,7 @@
 # Collaborators:
 # Time Spent: x:xx
 
-def get_permutations(sequence, save={}):
+def get_permutations(sequence, saved_permutations=None):
     """
     Enumerate all permutations of a given string
 
@@ -57,34 +57,38 @@ def get_permutations(sequence, save={}):
     # recursion allows to reduce the complexity by fixing letters inside the remaining letters set
     # base case --> len <= 1 sequence = [itself]
 
-    # initiate variables
+    # default argument None to have immutable arguments
+    if saved_permutations is None:
+        saved_permutations = {}
+
+    # create variable
     permutations = []
 
     # base case
     if len(sequence) <= 1:
-        return [sequence], save
+        return [sequence], saved_permutations
 
     # for each letter get the remaining letters
     for index in range(len(sequence)):
         remaining_letters = sequence[0:index] + sequence[index+1:]
 
         # dictionary save to avoid multiple calls to the same recursion values
-        if remaining_letters in save:
-            z = save[remaining_letters]
+        if remaining_letters in saved_permutations:
+            recursion_values = saved_permutations[remaining_letters]
         else:
             # recursion applied to the remaining letters --> reduces length at each function call
-            # add each permutation to the fixed letter
-            z = get_permutations(remaining_letters, save)
-            save[remaining_letters] = z[0]
+            recursion_values, saved_permutations = get_permutations(remaining_letters, saved_permutations)
+            saved_permutations[remaining_letters] = recursion_values
 
-        for n in z[0]:
-            word = sequence[index] + n
+        # add each permutation to the fixed letter
+        for entry in recursion_values:
+            word = sequence[index] + entry
+
+            # assure word are not repeated in the output
             if word not in permutations:
                 permutations.append(word)
-    return permutations, save
 
-    # !!! reduce number of recursions?
-    # assure there are no duplicate entries in the final list
+    return permutations, saved_permutations
 
 
 if __name__ == '__main__':
