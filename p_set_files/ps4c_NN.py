@@ -4,7 +4,7 @@
 # Time Spent: x:xx
 
 import string
-from ps4a import get_permutations
+from ps4a_NN import get_permutations
 
 ### HELPER CODE ###
 def load_words(file_name):

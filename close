@@ -1,0 +1,66 @@
+[33mcommit ba992bb0240a9e223eadeb4095c60c95e431f5f0[m[33m ([m[1;36mHEAD -> [m[1;32mpartA[m[33m, [m[1;31morigin/partA[m[33m)[m
+Author: Nuno Neves <nunomiguel_neves@hotmail.com>
+Date:   Thu Nov 18 20:11:41 2021 +0000
+
+    delete commented code
+
+[33mcommit 98bbec9fe790323d5a1198ff77b09d9e8fc91f19[m
+Author: Nuno Neves <nunomiguel_neves@hotmail.com>
+Date:   Thu Nov 18 20:08:12 2021 +0000
+
+    changes on get_permutations
+    
+    variable names
+    immutable argument default value
+    tidy up
+
+[33mcommit 47bc4a799cba34b9f75e1c0348587826a8b8cdd7[m
+Author: Nuno Neves <nunomiguel_neves@hotmail.com>
+Date:   Tue Nov 16 23:28:27 2021 +0000
+
+    modifications on get_permutations
+    
+    include dictionary save to reduce recursions
+    restricted the output to exclude duplicate values
+    
+    check number of recursions (next commit)
+
+[33mcommit 2e041bc542183c0a41f6fa5326cd50ee786a9425[m
+Author: Nuno Neves <nunomiguel_neves@hotmail.com>
+Date:   Mon Nov 15 23:36:24 2021 +0000
+
+    changed get_permutations
+    
+    different approach
+    fix the first letter and add permutations of the remaining letters
+
+[33mcommit db2f92757caa6fb85f37d2b765fa2ede9cbb32dc[m
+Author: Nuno Neves <nunomiguel_neves@hotmail.com>
+Date:   Mon Nov 15 20:25:02 2021 +0000
+
+    format fix
+
+[33mcommit e53442d8870de4a1c39a16e52e57dfb6ff5b8974[m
+Author: Nuno Neves <nunomiguel_neves@hotmail.com>
+Date:   Mon Nov 15 20:20:04 2021 +0000
+
+    create get_permutation function
+    
+    recursion reduces the sequence length
+    each letter is added in each available position for each permutation
+    [d]   -> .d.
+    [cd, dc] -> .c.d. __ .d.c.
+    [bcd, cbd, cdb, bdc, dbc, dcb] --> ...
+    ...
+
+[33mcommit cd6f5adf40e484e5eeacc932bbd6a343a3e3b771[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Nuno Neves <nunomiguel_neves@hotmail.com>
+Date:   Mon Nov 15 19:56:04 2021 +0000
+
+    Add data files related to the exercise
+
+[33mcommit 198f29a7f814efe8709444526257f8c1cd76a5d0[m
+Author: Nuno <73724564+NunoNN@users.noreply.github.com>
+Date:   Thu Nov 11 22:18:21 2021 +0000
+
+    Initial commit
