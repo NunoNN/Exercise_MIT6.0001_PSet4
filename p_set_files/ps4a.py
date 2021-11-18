@@ -24,31 +24,13 @@ def get_permutations(sequence, saved_permutations=None):
     """
 
     # FIRST APPROACH:
-
     # recursively remove letters from the sequence until len == 1
     # base case --> permutation on a single letter = [itself]
     # insert the first letter of the previous sequence in all the possible positions
-    # ex.: 'abcd'
+    # ex.: "abcd"
     # base case = d --> # insert c in possible positions : [.d.]
     # yields [cd, dc] --> continue with b in : [.c.d.] and in [.d.c.]
     # repeat for all the letters to get the full set of permutations
-
-    # code:
-    # assert len(sequence) != 0
-    # if type(sequence) is str:
-    #     sequence = list(sequence)
-    # if len(sequence) == 1:
-    #     return sequence
-    # first_letter = sequence[0]
-    # sequence = get_permutations(sequence[1:])
-    # temp = sequence[:]
-    # for n in range(len(temp)):
-    #     for j in range(len(temp[n]) + 1):
-    #         string = temp[n][0:j] + first_letter + temp[n][j:]
-    #         sequence.append(string)
-    # for i in temp:
-    #     sequence.remove(i)
-    # return sequence
 
     # SECOND APPROACH:
 
