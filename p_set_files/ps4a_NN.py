@@ -16,8 +16,8 @@ def get_permutations(sequence, saved_permutations=None):
     Returns: a list of all permutations of sequence
 
     Example:
-    # >>> get_permutations('abc')
-    # ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+    >>> get_permutations('abc')
+    ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
 
     Note: depending on your implementation, you may return the permutations in
     a different order than what is listed here.
@@ -74,14 +74,30 @@ def get_permutations(sequence, saved_permutations=None):
 
 
 if __name__ == '__main__':
-    #    #EXAMPLE
-    #    example_input = 'abc'
-    #    print('Input:', example_input)
-    #    print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
-    #    print('Actual Output:', get_permutations(example_input))
+    # # EXAMPLE
+    # example_input = 'abc'
+    # print('Input:', example_input)
+    # print('Expected Output:', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
+    # print('Actual Output:', get_permutations(example_input)[0])
+    # # Put three example test cases here (for your sanity, limit your inputs
+    # # to be three characters or fewer as you will have n! permutations for a
+    # # sequence of length n)
 
-    #    # Put three example test cases here (for your sanity, limit your inputs
-    #    to be three characters or fewer as you will have n! permutations for a
-    #    sequence of length n)
+    # Tests: (following the examples above)
+    # It is assumed that sequence is a non-empty string and the function returns a list.
 
-    pass  # delete this line and replace with your code here
+    test_sets = ['abc', 'xxyy', 'ide', 'ooooo']
+    test_results = []
+    expected_output = [['abc', 'acb', 'bac', 'bca', 'cab', 'cba'],
+                       ['xxyy', 'xyxy', 'xyyx', 'yxxy', 'yxyx', 'yyxx'],
+                       ['ide', 'ied', 'die', 'dei', 'eid', 'edi'],
+                       ['ooooo']]
+    for n in range(len(test_sets)):
+        print('Input:', test_sets[n])
+        print('Expected Output:', expected_output[n])
+        result = get_permutations(test_sets[n])[0]
+        print('Actual Output:', result)
+        test_results.append(result)
+
+    for i in range(len(test_results)):
+        assert expected_output[i] == test_results[i], 'Should be equal'
