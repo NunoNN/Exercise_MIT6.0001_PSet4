@@ -36,7 +36,8 @@ def get_permutations(sequence, saved_permutations=None):
 
     # fix the first letter
     # get the permutations of the remaining letters and add them to the fixed letter
-    # recursion allows to reduce the complexity by fixing letters inside the remaining letters set
+    # recursion allows to reduce the complexity by fixing letters inside the
+    # remaining letters set
     # base case --> len <= 1 sequence = [itself]
 
     # default argument None to have immutable arguments
@@ -58,8 +59,10 @@ def get_permutations(sequence, saved_permutations=None):
         if remaining_letters in saved_permutations:
             recursion_values = saved_permutations[remaining_letters]
         else:
-            # recursion applied to the remaining letters --> reduces length at each function call
-            recursion_values, saved_permutations = get_permutations(remaining_letters, saved_permutations)
+            # recursion applied to the remaining letters --> reduces length
+            # at each function call
+            recursion_values, saved_permutations = get_permutations(
+                remaining_letters, saved_permutations)
             saved_permutations[remaining_letters] = recursion_values
 
         # add each permutation to the fixed letter
