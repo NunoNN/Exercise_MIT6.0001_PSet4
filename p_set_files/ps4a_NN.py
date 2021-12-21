@@ -1,7 +1,4 @@
 # Problem Set 4A
-# Name: <your name here>
-# Collaborators:
-# Time Spent: x:xx
 
 def get_permutations(sequence, saved_permutations=None):
     """
@@ -44,12 +41,11 @@ def get_permutations(sequence, saved_permutations=None):
     if saved_permutations is None:
         saved_permutations = {}
 
-    # create variable
     permutations = []
 
     # base case
     if len(sequence) <= 1:
-        return [sequence], saved_permutations
+      return [sequence]
 
     # for each letter get the remaining letters
     for index in range(len(sequence)):
@@ -61,8 +57,7 @@ def get_permutations(sequence, saved_permutations=None):
         else:
             # recursion applied to the remaining letters --> reduces length
             # at each function call
-            recursion_values, saved_permutations = get_permutations(
-                remaining_letters, saved_permutations)
+            recursion_values = get_permutations(remaining_letters, saved_permutations)
             saved_permutations[remaining_letters] = recursion_values
 
         # add each permutation to the fixed letter
@@ -73,7 +68,7 @@ def get_permutations(sequence, saved_permutations=None):
             if word not in permutations:
                 permutations.append(word)
 
-    return permutations, saved_permutations
+    return permutations
 
 
 if __name__ == '__main__':
@@ -98,8 +93,8 @@ if __name__ == '__main__':
     for n in range(len(test_sets)):
         print('Input:', test_sets[n])
         print('Expected Output:', expected_output[n])
-        result = get_permutations(test_sets[n])[0]
-        print('Actual Output:', result)
+        result = get_permutations(test_sets[n])
+        print('Actual Output:', result, '\n')
         test_results.append(result)
 
     for i in range(len(test_results)):
