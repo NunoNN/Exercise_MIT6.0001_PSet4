@@ -239,8 +239,8 @@ class CiphertextMessage(Message):
         and the decrypted message text using that shift value
         """
         best_shift = max_score = 0
-        best_message = self.message_text
-
+        best_message = self.get_message_text()
+        # print('best_message:', best_message)
         for s in range(26):
 
             # apply shift
@@ -252,29 +252,96 @@ class CiphertextMessage(Message):
             # check words
             score = 0
             for word in split_text:
-                if is_word(self.valid_words, word):
+                if is_word(self.get_valid_words(), word):
                     score += 1
 
             # update values:
-            if score >= max_score:
+            if score > max_score:
                 best_shift, best_message = s, decrypted_text
+                max_score = score
+            # print('shift:', best_shift)
+            # print('score:', )
+            # print('Message:', best_message)
 
         return best_shift, best_message
 
 
 if __name__ == '__main__':
-    # Example test case (PlaintextMessage)
-    plaintext = PlaintextMessage('hello', 2)
-    print('Expected Output: jgnnq')
-    print('Actual Output:', plaintext.get_message_text_encrypted())
-
-    # Example test case (CiphertextMessage)
-    ciphertext = CiphertextMessage('jgnnq')
-    print('Expected Output:', (24, 'hello'))
-    print('Actual Output:', ciphertext.decrypt_message())
+    # # Example test case (PlaintextMessage)
+    # plaintext = PlaintextMessage('hello', 2)
+    # print('Expected Output: jgnnq')
+    # print('Actual Output:', plaintext.get_message_text_encrypted())
+    #
+    # # Example test case (CiphertextMessage)
+    # ciphertext = CiphertextMessage('jgnnq')
+    # print('Expected Output:', (24, 'hello'))
+    # print('Actual Output:', ciphertext.decrypt_message())
 
     # TODO: WRITE YOUR TEST CASES HERE
 
+    # 2 tests for each subclass (PlaintextMessage, CiphertextMessage)
+
+    # Test 1
+    print('\n\n***** Test 1 *****\n')
+
+    message1 = ('“Two things are infinite: the universe and human'
+                ' stupidity; and I\'m not sure about the universe.”'
+                '\n Albert Einstein')
+
+    plaintext1 = PlaintextMessage(message1, 15)
+    print('\nExpected Output:\n “Ild iwxcvh pgt xcuxcxit: iwt jcxktght pcs wjbpc '
+          'hijexsxin; pcs X\'b cdi hjgt pqdji iwt jcxktght.”\n Paqtgi Txchitxc')
+    print('\nActual Output:\n', plaintext1.get_message_text_encrypted())
+
+    # Test 2
+    print('\n\n***** Test 2 *****\n')
+
+    message2 = ('“Live as if you were to die tomorrow.'
+                ' Learn as if you were to live forever.”'
+                '\n Mahatma Gandhi')
+
+    plaintext2 = PlaintextMessage(message2, -4)
+    print('\nExpected Output:\n “Hera wo eb ukq sana pk zea pkiknnks. '
+          'Hawnj wo eb ukq sana pk hera bknaran.”\n Iwdwpiw Cwjzde')
+    print('\nActual Output:\n', plaintext2.get_message_text_encrypted())
+
+    # Test 3
+    print('\n\n***** Test 3 *****\n')
+
+    message3 = ('“Ild iwxcvh pgt xcuxcxit: iwt jcxktght pcs wjbpc '
+                'hijexsxin; pcs X\'b cdi hjgt pqdji iwt jcxktght.”'
+                '\n Paqtgi Txchitxc')
+
+    ciphertext1 = CiphertextMessage(message3)
+    print('\nExpected Output:\n “Two things are infinite: the universe and human'
+          ' stupidity; and I\'m not sure about the universe.”'
+          '\n Albert Einstein')
+
+    print('\nActual Output:\n', ciphertext1.decrypt_message()[1])
+    print('Shift:', ciphertext1.decrypt_message()[0])
+
+    # Test 4
+    print('\n\n***** Test 4 *****\n')
+
+    message4 = ('“Hera wo eb ukq sana pk zea pkiknnks.'
+                'Hawnj wo eb ukq sana pk hera bknaran.”'
+                '\n Iwdwpiw Cwjzde')
+
+    ciphertext2 = CiphertextMessage(message4)
+    print('\nExpected Output:\n “Live as if you were to die tomorrow.'
+          ' Learn as if you were to live forever.”'
+          '\n Mahatma Gandhi')
+
+    print('\nActual Output:\n', ciphertext2.decrypt_message()[1])
+    print('Shift:', ciphertext2.decrypt_message()[0])
+
+    # Study tests: unittest, pytest,...
+
     # TODO: best shift value and unencrypted story
 
-    pass  # delete this line and replace with your code here
+    encrypted_story = CiphertextMessage(get_story_string())
+    cipher_shift, decrypted_story = encrypted_story.decrypt_message()
+
+    print('Encrypted Message:\n', get_story_string())
+    print('Applied shift:', cipher_shift)
+    print('Decrypted Message:\n', decrypted_story)
