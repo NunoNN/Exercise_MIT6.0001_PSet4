@@ -45,7 +45,7 @@ def get_permutations(sequence, saved_permutations=None):
 
     # base case
     if len(sequence) <= 1:
-      return [sequence]
+        return [sequence]
 
     # for each letter get the remaining letters
     for index in range(len(sequence)):
